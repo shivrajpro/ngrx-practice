@@ -10,16 +10,17 @@ import { CounterState } from '../state/counter.state';
 })
 export class CounterOutputComponent implements OnInit {
   // @Input() counter: any;
-  // counter: number = 0;
-  counter$:Observable<{ counter: number}>;
+  counter: number = 0;
+  // counter$:Observable<{ counter: number}>;
   constructor(private store: Store<{ counter: CounterState }>) { 
-    this.counter$ = this.store.select('counter');
+    // this.counter$ = this.store.select('counter');
   }
 
   ngOnInit(): void {
-    // this.store.select("counter").subscribe((data) => {
-    //   this.counter = data.counter;
-    // })
+    this.store.select("counter").subscribe((data) => {
+      console.log("counter obs called");
+      this.counter = data.counter;
+    })
   }
 
 }
