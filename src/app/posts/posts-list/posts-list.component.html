@@ -1,18 +1,20 @@
 <p>posts-list works!</p>
-<button routerLink="add" >Add Post</button>
+<button routerLink="add">Add Post</button>
 <table *ngIf="posts | async as postsList">
     <thead>
         <tr>
             <th>Id</th>
             <th>Title</th>
             <th>Description</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let post of postsList" >
+        <tr *ngFor="let post of postsList">
             <td> {{post.id}} </td>
             <td> {{post.title}} </td>
             <td> {{post.description}} </td>
+            <td> <button [routerLink]="['edit', post.id]" >Update</button> </td>
         </tr>
     </tbody>
 </table>
