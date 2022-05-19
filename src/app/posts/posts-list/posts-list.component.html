@@ -1,4 +1,5 @@
 <p>posts-list works!</p>
+<button routerLink="add" >Add Post</button>
 <table *ngIf="posts | async as postsList">
     <thead>
         <tr>
@@ -15,3 +16,7 @@
         </tr>
     </tbody>
 </table>
+
+<div>
+    <router-outlet></router-outlet>
+</div>

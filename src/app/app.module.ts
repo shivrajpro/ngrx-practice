@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { PostsListComponent } from './posts/posts-list/posts-list.component';
 import { postsReducer } from './posts/state/posts.reducer';
 import { appReducer } from './store/app.state';
+import { AddPostComponent } from './posts/add-post/add-post.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +27,14 @@ import { appReducer } from './store/app.state';
     CustomCounterInputComponent,
     HomeComponent,
     HeaderComponent,
-    PostsListComponent
+    PostsListComponent,
+    AddPostComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(appReducer),
     // 'counter' will be used to select in every component as required
     StoreDevtoolsModule.instrument({
