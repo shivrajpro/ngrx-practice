@@ -1,0 +1,10 @@
+<p>add-post works!</p>
+
+<form [formGroup]="postForm" (ngSubmit)="onSavePost()" >
+    <input type="text" placeholder="enter title" formControlName="title" >
+    <br/>
+    <br/>
+    <textarea cols="30" rows="5" placeholder="enter description" formControlName="description" ></textarea>
+    <br>
+    <button type="submit" >Save</button>
+</form>
