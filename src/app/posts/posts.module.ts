@@ -7,6 +7,7 @@ import { AddPostComponent } from './add-post/add-post.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { PostsListComponent } from './posts-list/posts-list.component';
 import { postsReducer } from './state/posts.reducer';
+import { POSTS_STATE_NAME } from './state/posts.selectors';
 
 const routes: Routes = [
   {
@@ -29,7 +30,7 @@ const routes: Routes = [
     FormsModule, 
     ReactiveFormsModule, 
     RouterModule.forChild(routes),
-    StoreModule.forFeature('posts', postsReducer)
+    StoreModule.forFeature(POSTS_STATE_NAME, postsReducer)
   ]
 })
 export class PostsModule {}
