@@ -8,18 +8,23 @@ import { PostsListComponent } from './posts/posts-list/posts-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'counter', component: CounterComponent },
   {
-    path: 'posts', component: PostsListComponent,
+    path: 'counter',
+    loadChildren: () =>
+      import('./counter/counter.module').then((m) => m.CounterModule),
+  },
+  {
+    path: 'posts',
+    component: PostsListComponent,
     children: [
       { path: 'add', component: AddPostComponent },
-      { path: 'edit/:id', component: EditPostComponent }
-    ]
-  }
+      { path: 'edit/:id', component: EditPostComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
