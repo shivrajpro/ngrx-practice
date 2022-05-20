@@ -23,10 +23,7 @@ import { EditPostComponent } from './posts/edit-post/edit-post.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    HeaderComponent,
-    PostsListComponent,
-    AddPostComponent,
-    EditPostComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
