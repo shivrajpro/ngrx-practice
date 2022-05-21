@@ -1,0 +1,8 @@
+selector is only to read the data and give a name to state
+
+whenever we are going to deal with the data in component:
+1. create a variable in state
+2. create action for it with required props, createAction method takes a string and props
+3. implement the necessary action in reducer
+4. dispatch the action from component if data needs to stored in state
+5. subscribe to the store if data is to be read
