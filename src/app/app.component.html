@@ -1,5 +1,6 @@
 <div class="container">
   <app-header></app-header>
+  <app-loading-spinner *ngIf="showLoading | async" ></app-loading-spinner>
   <div class="row">
     <div class="col-md-12 text-center">
       <!-- <app-counter></app-counter> -->
