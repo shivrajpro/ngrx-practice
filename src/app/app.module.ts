@@ -8,6 +8,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthEffects } from "./auth/state/auth.effects";
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from "./shared/components/header/header.component";
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
@@ -26,7 +27,7 @@ import { appReducer } from "./store/app.state";
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(appReducer),
     // 'counter' will be used to select in every component as required
     StoreDevtoolsModule.instrument({

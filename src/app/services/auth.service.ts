@@ -9,6 +9,8 @@ import { User } from '../models/user.model';
   providedIn: 'root',
 })
 export class AuthService {
+  logoutTimeOutId:any;
+
   constructor(private http: HttpClient) {}
   signUpUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key";
 
@@ -40,5 +42,35 @@ export class AuthService {
     );
 
     return user;
+  }
+
+  setUserInLocalStorage(user:User){
+    localStorage.setItem('userData',JSON.stringify(user));
+    this.runTimeOutInterval(user);
+  }
+
+  runTimeOutInterval(user: User) {
+    const todaysDate = new Date().getTime();
+    const expirationDate = user.expriryDate.getTime();
+    const diff = expirationDate - todaysDate;
+
+    this.logoutTimeOutId = setTimeout(() => {
+      // logout functionality or get the refresh token
+    }, diff);
+  }
+
+  getUserFromLocalStorage(){
+    const userDataStr = localStorage.getItem('userData');
+
+    if(userDataStr){
+      const userData = JSON.parse(userDataStr);
+      const expirationDate = new Date(userData.expirationDate);
+      const user = new User(userData.email, userData.token, userData.localId, expirationDate);
+
+      this.runTimeOutInterval(user);
+      return user;
+    }
+
+    return null;
   }
 }

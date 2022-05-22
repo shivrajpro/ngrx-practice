@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, exhaustMap, map, of, tap } from 'rxjs';
+import { catchError, exhaustMap, map, mergeMap, of, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { AppState } from 'src/app/store/app.state';
 import {
   setErrorMessage,
   setLoadingSpinner,
 } from 'src/app/store/shared/shared.action';
-import { loginStart, loginSuccess, signupStart, signupSuccess } from './auth.actions';
+import { autoLogin, loginStart, loginSuccess, signupStart, signupSuccess } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -29,6 +29,7 @@ export class AuthEffects {
             const user = this.authService.formatUser(data);
             this.store.dispatch(setLoadingSpinner({ status: false }));
             this.store.dispatch(setErrorMessage({ message: '' }));
+            this.authService.setUserInLocalStorage(user);
             return loginSuccess({ user });
           }),
           catchError((errorRes) => {
@@ -75,6 +76,18 @@ export class AuthEffects {
       );
     },
     { dispatch: false } // this effect will not return anything
+  );
+
+  autoLogin$ = createEffect(()=>{
+    return this.actions$.pipe(
+      ofType(autoLogin),
+      map((action)=>{
+        const user =this.authService.getUserFromLocalStorage();
+        console.log(user);
+      })
+    )
+  },
+  {dispatch: false}
   );
 
   // signupRedirect$ = createEffect(
