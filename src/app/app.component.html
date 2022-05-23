@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="false" class="container">
   <app-header></app-header>
   <app-loading-spinner *ngIf="showLoading | async"></app-loading-spinner>
   <div class="row">
@@ -10,4 +10,17 @@
       </div>
     </div>
   </div>
+</div>
+<div class="wrapper">
+
+  <button routerLink="" >Home</button>
+  <button routerLink="public-page" >Public Page</button>
+  <button routerLink="restricted-page" >Restricted Page</button>
+  <button *ngIf="!isLoggedIn()" (click)="onLogin()">Sign In</button>
+  <button *ngIf="isLoggedIn()" (click)="logout()">Sign Out</button>
+  <p *ngIf="!isLoggedIn()">You are not logged in</p>
+  <p *ngIf="isLoggedIn()">You are now logged in</p>
+
+  <router-outlet></router-outlet>
+
 </div>

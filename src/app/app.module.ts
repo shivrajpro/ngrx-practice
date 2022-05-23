@@ -13,13 +13,27 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from "./shared/components/header/header.component";
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 import { appReducer } from "./store/app.state";
+import { PublicPageComponent } from './public-page/public-page.component';
+import { RestrictedPageComponent } from './restricted-page/restricted-page.component';
+import { IPublicClientApplication, PublicClientApplication } from "@azure/msal-browser";
+import { MsalService, MSAL_INSTANCE } from "@azure/msal-angular";
 
+export function MSALInstanceFactory(): IPublicClientApplication {
+  return new PublicClientApplication({
+    auth:{
+      clientId:'bc0e6bfb-f8d6-4ed1-aad9-3d5a27522863',
+      redirectUri:'http://localhost:4200/'
+    }
+  })
+}
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    PublicPageComponent,
+    RestrictedPageComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +50,13 @@ import { appReducer } from "./store/app.state";
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MSAL_INSTANCE,
+      useFactory:MSALInstanceFactory
+    },
+    MsalService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
