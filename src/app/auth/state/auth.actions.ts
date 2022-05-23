@@ -9,6 +9,7 @@ export const SIGNUP_START = '[auth page] sign up start';
 export const SIGNUP_SUCCESS = '[auth page] sign up success';
 
 export const AUTO_LOGIN = '[auth page] auto login';
+export const AUTO_LOGOUT = '[auth page] auto logout';
 
 export const loginStart = createAction(
   LOGIN_START,
@@ -31,3 +32,4 @@ export const signupSuccess = createAction(
 );
 
 export const autoLogin = createAction(AUTO_LOGIN);
+export const autoLogout = createAction(AUTO_LOGOUT);

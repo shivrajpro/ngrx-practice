@@ -1,4 +1,4 @@
-<div *ngIf="false" class="container">
+<div class="container">
   <app-header></app-header>
   <app-loading-spinner *ngIf="showLoading | async"></app-loading-spinner>
   <div class="row">
@@ -11,7 +11,7 @@
     </div>
   </div>
 </div>
-<div class="wrapper">
+<div *ngIf="false" class="wrapper">
 
   <button routerLink="" >Home</button>
   <button routerLink="public-page" >Public Page</button>

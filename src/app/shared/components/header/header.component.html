@@ -3,4 +3,4 @@
 <button routerLink="posts"  >Posts</button>
 <button routerLink="auth" *ngIf="!(isAuthenticated | async)">Login</button>
 <button routerLink="auth/signup" *ngIf="!(isAuthenticated | async)">Sign Up</button>
-<button routerLink="auth" *ngIf="isAuthenticated | async" >Logout</button>
+<button routerLink="auth" *ngIf="isAuthenticated | async" (click)="onLogout($event)" >Logout</button>

@@ -9,7 +9,14 @@ import {
   setErrorMessage,
   setLoadingSpinner,
 } from 'src/app/store/shared/shared.action';
-import { autoLogin, loginStart, loginSuccess, signupStart, signupSuccess } from './auth.actions';
+import {
+  autoLogin,
+  autoLogout,
+  loginStart,
+  loginSuccess,
+  signupStart,
+  signupSuccess,
+} from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -78,18 +85,32 @@ export class AuthEffects {
     { dispatch: false } // this effect will not return anything
   );
 
-  autoLogin$ = createEffect(()=>{
-    return this.actions$.pipe(
-      ofType(autoLogin),
-      map((action)=>{
-        const user =this.authService.getUserFromLocalStorage();
-        console.log(user);
-      })
-    )
-  },
-  {dispatch: false}
+  autoLogin$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(autoLogin),
+        mergeMap((action) => {
+          const user = this.authService.getUserFromLocalStorage();
+          return of(loginSuccess({ user }));
+          // console.log(user);
+        })
+      );
+    },
+    { dispatch: false }
   );
 
+  autoLogout$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(autoLogout),
+        map((action) => {
+          this.authService.logout();
+          this.router.navigate(['auth/login']);
+        })
+      );
+    },
+    { dispatch: false }
+  );
   // signupRedirect$ = createEffect(
   //   () => {
   //     return this.actions$.pipe(
