@@ -95,8 +95,8 @@ export class AuthEffects {
           // console.log(user);
         })
       );
-    },
-    { dispatch: false }
+    }
+    // { dispatch: false } autlogin was failing due to this
   );
 
   autoLogout$ = createEffect(
