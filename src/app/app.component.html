@@ -17,10 +17,11 @@
   <button routerLink="public-page" >Public Page</button>
   <button routerLink="restricted-page" >Restricted Page</button>
   <button *ngIf="!isLoggedIn()" (click)="onLogin()">Sign In</button>
-  <button *ngIf="isLoggedIn()" (click)="logout()">Sign Out</button>
-  <p *ngIf="!isLoggedIn()">You are not logged in</p>
-  <p *ngIf="isLoggedIn()">You are now logged in</p>
-
+  <button *ngIf="isLoggedIn()" (click)="logout()">Sign Out from MS</button>
+  <button *ngIf="isLoggedIn()" (click)="logout()">Sign Out from Connect360</button>
+  <h2 style="background: red;" *ngIf="!isLoggedIn()">You are not logged in</h2>
+  <h2 style="background: green;" *ngIf="isLoggedIn()">You are now logged in</h2>
+  <!-- <iframe src="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=bc0e6bfb-f8d6-4ed1-aad9-3d5a27522863&scope=openid%20profile%20offline_access&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2F&client-request-id=eeab0ad6-2824-4715-8254-f8ceb7797677&response_mode=fragment&response_type=code&x-client-SKU=msal.js.browser&x-client-VER=2.24.0&client_info=1&code_challenge=HrdPGIFEUeNQuX-XL8hrU8mIJKYpJf-BSiLrat2_fWw&code_challenge_method=S256&nonce=29785b1f-3ac1-42a4-bb4e-f618f6f30f95&state=eyJpZCI6IjI1YzI1MDYwLWM3MzMtNDBkYS05ZDRjLTRmNDNiZGQxYzlmOSIsIm1ldGEiOnsiaW50ZXJhY3Rpb25UeXBlIjoicmVkaXJlY3QifX0%3D" frameborder="0"></iframe> -->
   <router-outlet></router-outlet>
 
 </div>
