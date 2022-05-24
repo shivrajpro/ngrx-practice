@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -16,7 +17,10 @@ export class AppComponent implements OnInit {
   showLoading: Observable<boolean>;
   errorMessage: Observable<string>;
 
-  constructor(private store: Store<AppState>, private msalService: MsalService) {
+  constructor(private store: Store<AppState>, 
+    private msalService: MsalService,
+    private router: Router
+    ) {
     this.showLoading = this.store.select(getLoading);
     this.errorMessage = this.store.select(getErrorMessage);
 
@@ -29,6 +33,8 @@ export class AppComponent implements OnInit {
         this.msalService.instance.setActiveAccount(response.account);
       }
     })
+    // if(!this.isLoggedIn())
+    // this.msalService.loginRedirect();
   }
 
   isLoggedIn(){
@@ -46,6 +52,12 @@ export class AppComponent implements OnInit {
 
   logout(){
     this.msalService.logout();
+    // this.msalService.logoutRedirect();
+  }
+
+  signOut(){
+    sessionStorage.clear();
+    this.router.navigate(['/']);
   }
 
 }
