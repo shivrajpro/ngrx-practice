@@ -33,4 +33,15 @@ export class PostsService {
   addPost(post:Post): Observable<{name: string}>{
     return this.http.post<{name: string}>(this.postsDataUrl, post);
   }
+
+  updatePost(post:Post){
+    const postData = {
+      [post.id]:{title: post.title, description: post.description}
+    }
+    return this.http.patch(this.postsDataUrl, postData);
+  }
+
+  deletePost(id: string){
+    return this.http.delete(`https://ngrx-practice-b655e-default-rtdb.firebaseio.com/posts/${id}.json`);
+  }
 }
