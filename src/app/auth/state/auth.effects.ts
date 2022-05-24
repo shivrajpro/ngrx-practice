@@ -9,7 +9,14 @@ import {
   setErrorMessage,
   setLoadingSpinner,
 } from 'src/app/store/shared/shared.action';
-import { autoLogin, loginStart, loginSuccess, signupStart, signupSuccess } from './auth.actions';
+import {
+  autoLogin,
+  autoLogout,
+  loginStart,
+  loginSuccess,
+  signupStart,
+  signupSuccess,
+} from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -30,7 +37,7 @@ export class AuthEffects {
             this.store.dispatch(setLoadingSpinner({ status: false }));
             this.store.dispatch(setErrorMessage({ message: '' }));
             this.authService.setUserInLocalStorage(user);
-            return loginSuccess({ user });
+            return loginSuccess({ user, redirect: true });
           }),
           catchError((errorRes) => {
             this.store.dispatch(setLoadingSpinner({ status: false }));
@@ -52,7 +59,7 @@ export class AuthEffects {
             const user = this.authService.formatUser(data);
             this.store.dispatch(setLoadingSpinner({ status: false }));
             this.store.dispatch(setErrorMessage({ message: '' }));
-            return signupSuccess({ user });
+            return signupSuccess({ user, redirect: true });
           }),
           catchError((errorRes) => {
             this.store.dispatch(setLoadingSpinner({ status: false }));
@@ -71,6 +78,7 @@ export class AuthEffects {
         // ofType(loginSuccess),
         ofType(...[loginSuccess, signupSuccess]),
         tap((action) => {
+          if(action.redirect)
           this.router.navigate(['/']);
         })
       );
@@ -78,18 +86,32 @@ export class AuthEffects {
     { dispatch: false } // this effect will not return anything
   );
 
-  autoLogin$ = createEffect(()=>{
-    return this.actions$.pipe(
-      ofType(autoLogin),
-      map((action)=>{
-        const user =this.authService.getUserFromLocalStorage();
-        console.log(user);
-      })
-    )
-  },
-  {dispatch: false}
+  autoLogin$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(autoLogin),
+        mergeMap((action) => {
+          const user = this.authService.getUserFromLocalStorage();
+          return of(loginSuccess({ user, redirect: false }));
+          // console.log(user);
+        })
+      );
+    }
+    // { dispatch: false } autlogin was failing due to this
   );
 
+  autoLogout$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(autoLogout),
+        map((action) => {
+          this.authService.logout();
+          this.router.navigate(['auth/login']);
+        })
+      );
+    },
+    { dispatch: false }
+  );
   // signupRedirect$ = createEffect(
   //   () => {
   //     return this.actions$.pipe(
