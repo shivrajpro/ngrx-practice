@@ -7,6 +7,8 @@ import { Post } from '../models/posts.model';
   providedIn: 'root',
 })
 export class PostsService {
+  readonly postsDataUrl = `https://ngrx-practice-b655e-default-rtdb.firebaseio.com/posts.json`;
+
   constructor(private http: HttpClient) {}
 
   getPosts(): Observable<Post[]> {
@@ -26,5 +28,9 @@ export class PostsService {
           return posts;
         })
       );
+  }
+
+  addPost(post:Post): Observable<{name: string}>{
+    return this.http.post<{name: string}>(this.postsDataUrl, post);
   }
 }

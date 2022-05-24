@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { map, mergeMap } from "rxjs";
 import { PostsService } from "../posts.service";
-import { loadPosts, loadPostsSuccess } from "./posts.action";
+import { addPost, addPostSuccess, loadPosts, loadPostsSuccess } from "./posts.action";
 
 @Injectable()
 export class PostsEffects{
@@ -23,5 +23,21 @@ export class PostsEffects{
         )
     }
     // {dispatch:false}
+    )
+
+    addPost$ = createEffect(()=>{
+        return this.action$.pipe(
+            ofType(addPost),
+            mergeMap((action)=>{
+                return this.postsService.addPost(action.post).pipe(
+                    map((data)=>{
+                        console.log("data",data);
+                        const post = {...action.post, id: data.name};
+                        return addPostSuccess({post});
+                    })
+                )
+            })
+        )
+    }
     )
 }

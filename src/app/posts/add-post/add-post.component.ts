@@ -31,6 +31,7 @@ export class AddPostComponent implements OnInit {
       description: this.postForm.value.description
     }
     this.store.dispatch(addPost({ post }));
+    // addPost will be there in ofType in effects
     this.postForm.reset();
   }
 }
