@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { MsalGuard } from './msalguard.guard';
 import { PublicPageComponent } from './public-page/public-page.component';
 import { RestrictedPageComponent } from './restricted-page/restricted-page.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
     path: 'posts',
     loadChildren: () =>
       import('./posts/posts.module').then((m) => m.PostsModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'auth',
