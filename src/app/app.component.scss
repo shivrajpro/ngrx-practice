@@ -1,0 +1,20 @@
+.my-mat-expansion{
+    width: 220px;
+    // border: 1px solid;
+
+    .mat-expansion-panel{
+        box-shadow: none;
+    }
+    // .mat-expansion-panel-header-title{
+    //     font-weight: 700;
+    //     font-size: 1.2rem;
+    // }
+    .mat-expansion-panel-header{
+        padding: 0 12px;
+    }
+    p.active{
+        border-left: 2px solid blue;
+        padding: 2px;
+    }
+
+}

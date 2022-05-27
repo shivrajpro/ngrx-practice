@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="false" class="container">
   <app-header></app-header>
   <app-loading-spinner *ngIf="showLoading | async"></app-loading-spinner>
   <div class="row">
@@ -24,4 +24,84 @@
   <!-- <iframe src="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=bc0e6bfb-f8d6-4ed1-aad9-3d5a27522863&scope=openid%20profile%20offline_access&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2F&client-request-id=eeab0ad6-2824-4715-8254-f8ceb7797677&response_mode=fragment&response_type=code&x-client-SKU=msal.js.browser&x-client-VER=2.24.0&client_info=1&code_challenge=HrdPGIFEUeNQuX-XL8hrU8mIJKYpJf-BSiLrat2_fWw&code_challenge_method=S256&nonce=29785b1f-3ac1-42a4-bb4e-f618f6f30f95&state=eyJpZCI6IjI1YzI1MDYwLWM3MzMtNDBkYS05ZDRjLTRmNDNiZGQxYzlmOSIsIm1ldGEiOnsiaW50ZXJhY3Rpb25UeXBlIjoicmVkaXJlY3QifX0%3D" frameborder="0"></iframe> -->
   <router-outlet></router-outlet>
 
+</div>
+<div class="my-mat-expansion" >
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>manage_accounts</mat-icon>
+          Campaign Config
+        </mat-panel-title>
+        <mat-icon *ngIf="panelOpenState" >keyboard_arrow_down</mat-icon>    
+        <mat-icon *ngIf="!panelOpenState" >chevron_right</mat-icon>    
+      </mat-expansion-panel-header>
+      <p class="active" >User Creation</p>
+      <p>Sub Module 2</p>
+      <p>Sub Module 3</p>
+    </mat-expansion-panel>
+  </mat-accordion>   
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>group</mat-icon>
+          iConnect
+        </mat-panel-title>
+        <mat-icon *ngIf="panelOpenState" >keyboard_arrow_down</mat-icon>    
+        <mat-icon *ngIf="!panelOpenState" >chevron_right</mat-icon>    
+      </mat-expansion-panel-header>
+      <p class="active" >User Creation</p>
+      <p>Sub Module 2</p>
+      <p>Sub Module 3</p>
+    </mat-expansion-panel>
+  </mat-accordion> 
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>analytics</mat-icon>
+          Quality Audit
+        </mat-panel-title>
+        <mat-icon *ngIf="panelOpenState" >keyboard_arrow_down</mat-icon>    
+        <mat-icon *ngIf="!panelOpenState" >chevron_right</mat-icon>    
+      </mat-expansion-panel-header>
+      <p class="active" >User Creation</p>
+      <p>Sub Module 2</p>
+      <p>Sub Module 3</p>
+    </mat-expansion-panel>
+  </mat-accordion> 
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>work</mat-icon>
+          WFM
+        </mat-panel-title>
+        <mat-icon *ngIf="panelOpenState" >keyboard_arrow_down</mat-icon>    
+        <mat-icon *ngIf="!panelOpenState" >chevron_right</mat-icon>    
+      </mat-expansion-panel-header>
+      <p class="active" >User Creation</p>
+      <p>Sub Module 2</p>
+      <p>Sub Module 3</p>
+    </mat-expansion-panel>
+  </mat-accordion>     
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>person</mat-icon>
+          User Admin
+        </mat-panel-title>
+        <mat-icon *ngIf="panelOpenState" >keyboard_arrow_down</mat-icon>    
+        <mat-icon *ngIf="!panelOpenState" >chevron_right</mat-icon>    
+      </mat-expansion-panel-header>
+      <p class="active" >User Creation</p>
+      <p>Sub Module 2</p>
+      <p>Sub Module 3</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="collapse-expand-bt">
+    <p><mat-icon>bar_chart</mat-icon></p>
+  </div>
 </div>

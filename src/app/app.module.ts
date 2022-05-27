@@ -18,6 +18,8 @@ import { RestrictedPageComponent } from './restricted-page/restricted-page.compo
 import { IPublicClientApplication, PublicClientApplication } from "@azure/msal-browser";
 import { MsalService, MSAL_INSTANCE } from "@azure/msal-angular";
 import { AuthInterceptor } from "./services/auth-interceptor.service";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from "./material.module";
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
@@ -49,7 +51,9 @@ export function MSALInstanceFactory(): IPublicClientApplication {
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
-    })
+    }),
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [
     {

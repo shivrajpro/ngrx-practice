@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   title = 'my-app';
   showLoading: Observable<boolean>;
   errorMessage: Observable<string>;
+  panelOpenState = false;
 
   constructor(private store: Store<AppState>, 
     private msalService: MsalService,
