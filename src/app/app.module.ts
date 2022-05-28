@@ -20,6 +20,8 @@ import { MsalService, MSAL_INSTANCE } from "@azure/msal-angular";
 import { AuthInterceptor } from "./services/auth-interceptor.service";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from "./material.module";
+import { StoreRouterConnectingModule } from "@ngrx/router-store";
+import { IsAuthorizedDirective } from "./shared/directives/authorized.directive";
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
@@ -36,7 +38,8 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     HeaderComponent,
     LoadingSpinnerComponent,
     PublicPageComponent,
-    RestrictedPageComponent
+    RestrictedPageComponent,
+    IsAuthorizedDirective
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ export function MSALInstanceFactory(): IPublicClientApplication {
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [
     {
