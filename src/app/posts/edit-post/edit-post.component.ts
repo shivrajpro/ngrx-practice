@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Post } from 'src/app/models/posts.model';
@@ -18,24 +18,36 @@ export class EditPostComponent implements OnInit, OnDestroy {
   postForm:FormGroup;
   postSub:Subscription;
 
-  constructor(private route:ActivatedRoute, private store:Store<AppState>) { }
+  constructor(private route:ActivatedRoute, private store:Store<AppState>, private router: Router) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params)=>{
-      const id = params.get('id') || '';
-      this.postSub = this.store.select(getPostById(id)).subscribe((data)=>{
-        // console.log("data",data);
-        this.post = data as Post;
+    // this.route.paramMap.subscribe((params)=>{
+    //   const id = params.get('id') || '';
+    //   this.postSub = this.store.select(getPostById(id)).subscribe((data)=>{
+    //     // console.log("data",data);
+    //     this.post = data as Post;
 
-        this.createForm();
-      })
+    //     this.createForm();
+    //   })
+    // })
+
+    this.createForm();
+    this.store.select(getPostById).subscribe((post)=>{
+      if(post){
+        this.post = post;
+
+        this.postForm.patchValue({
+          title: post.title,
+          description: post.description
+        })
+      }
     })
   }
 
   createForm(){
     this.postForm = new FormGroup({
-      title: new FormControl(this.post.title, [Validators.required, Validators.minLength(6)]),
-      description: new FormControl(this.post.description, [Validators.required, Validators.minLength(10)])
+      title: new FormControl(null, [Validators.required, Validators.minLength(6)]),
+      description: new FormControl(null, [Validators.required, Validators.minLength(10)])
     })
   }
 
@@ -48,10 +60,10 @@ export class EditPostComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(updatePost({post}));
     this.postForm.reset();
-
+    this.router.navigate(['posts']);
   }
 
   ngOnDestroy() {
-    this.postSub.unsubscribe();
+    if(this.postSub) this.postSub.unsubscribe();
   }
 }

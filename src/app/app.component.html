@@ -1,4 +1,4 @@
-<div *ngIf="false" class="container">
+<div class="container">
   <app-header></app-header>
   <app-loading-spinner *ngIf="showLoading | async"></app-loading-spinner>
   <div class="row">
@@ -105,13 +105,14 @@
     <p><mat-icon>bar_chart</mat-icon></p>
   </div>
 </div>
-<p *isAuthorized="['ADMIN','USER', 'MANUFACTURER_ADMIN']" >
-  "['ADMIN','USER', 'MANUFACTURER_ADMIN']"
-</p>
-<p *isAuthorized="['ADMIN']">
-  "['ADMIN']"
-</p>
-<p  *isAuthorized="['MANUFACTURER_ADMIN']">
-  "['MANUFACTURER_ADMIN']"
-</p>
-<button class="danger">save</button>
+<div *ngIf="false" class="authorize-directive">
+  <p *isAuthorized="['ADMIN','USER', 'MANUFACTURER_ADMIN']" >
+    "['ADMIN','USER', 'MANUFACTURER_ADMIN']"
+  </p>
+  <p *isAuthorized="['ADMIN']">
+    "['ADMIN']"
+  </p>
+  <p  *isAuthorized="['MANUFACTURER_ADMIN']">
+    "['MANUFACTURER_ADMIN']"
+  </p>
+</div>

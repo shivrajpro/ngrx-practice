@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from "./material.module";
 import { StoreRouterConnectingModule } from "@ngrx/router-store";
 import { IsAuthorizedDirective } from "./shared/directives/authorized.directive";
+import { CustomSerializer } from "./store/router/custom.serializer";
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
@@ -57,7 +58,9 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     }),
     BrowserAnimationsModule,
     MaterialModule,
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot({
+      serializer: CustomSerializer
+    })
   ],
   providers: [
     {
