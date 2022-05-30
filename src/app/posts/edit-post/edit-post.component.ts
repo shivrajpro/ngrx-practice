@@ -61,6 +61,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
     this.store.dispatch(updatePost({post}));
     this.postForm.reset();
     this.router.navigate(['posts']);
+    // can write the redirection logic in effects
   }
 
   ngOnDestroy() {

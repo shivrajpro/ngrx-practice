@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MsalGuard } from './msalguard.guard';
+import { SinglePostComponent } from './posts/single-post/single-post.component';
 import { PublicPageComponent } from './public-page/public-page.component';
 import { RestrictedPageComponent } from './restricted-page/restricted-page.component';
 import { AuthGuard } from './services/auth.guard';
@@ -31,7 +32,11 @@ const routes: Routes = [
     path: 'restricted-page',
     component: RestrictedPageComponent,
     canActivate: [MsalGuard]
-  }  
+  },
+  {
+    path:'posts/details/:id',
+    component: SinglePostComponent
+  }
 ];
 
 @NgModule({

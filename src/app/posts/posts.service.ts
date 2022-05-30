@@ -44,4 +44,8 @@ export class PostsService {
   deletePost(id: string){
     return this.http.delete(`https://ngrx-practice-b655e-default-rtdb.firebaseio.com/posts/${id}.json`);
   }
+
+  getPostById(id:string){
+    return this.http.get<Post>(`https://ngrx-practice-b655e-default-rtdb.firebaseio.com/posts/${id}.json`);
+  }
 }
