@@ -1,41 +1,46 @@
 import { createReducer, on } from "@ngrx/store";
 import { addPostSuccess, deletePost, deletePostSuccess, loadPostsSuccess, updatePost, updatePostSuccess } from "./posts.action";
-import { initialState } from "./posts.state";
+import { initialState, postAdapter } from "./posts.state";
 
 const _postsReducer = createReducer(initialState,
     on(addPostSuccess, (state, action) => {
-        const post = { ...action.post };
+        return postAdapter.addOne(action.post, state);
+        // const post = { ...action.post };
         // post.id = (state.posts.length + 1).toString();
 
-        return {
-            ...state,
-            posts: [...state.posts, post]
-        }
+        // return {
+        //     ...state,
+        //     posts: [...state.posts, post]
+        // }
     }),
-    on(updatePostSuccess, (state, action)=>{
-        const updatePosts = state.posts.map((post)=>{
-            if (post.id === action.post.id) return action.post;
-            return post;
-        })
+    on(updatePostSuccess, (state, action) => {
+        return postAdapter.updateOne(action.post, state);
+        // const updatePosts = state.posts.map((post) => {
+        //     if (post.id === action.post.id) return action.post;
+        //     return post;
+        // })
         // console.log("updatedposts",updatePosts);
-        return {
-            ...state,
-            posts:updatePosts
-        }
+        // return {
+        //     ...state,
+        //     posts: updatePosts
+        // }
     }),
     on(deletePostSuccess, (state, action)=>{
-        const newPostsList = state.posts.filter((post)=> post.id != action.id);
+        return postAdapter.removeOne(action.id, state);
 
-        return {
-            ...state,
-            posts:newPostsList
-        }
+        // const newPostsList = state.posts.filter((post)=> post.id != action.id);
+
+        // return {
+        //     ...state,
+        //     posts:newPostsList
+        // }
     }),
     on(loadPostsSuccess, (state, action)=>{
-        return {
-            ...state,
-            posts: action.posts
-        }
+        return postAdapter.setAll(action.posts, state);
+        // return {
+        //     ...state,
+        //     posts: action.posts
+        // }
     })
 
 );
