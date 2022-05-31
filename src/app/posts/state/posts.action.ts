@@ -28,3 +28,4 @@ export const loadPostsSuccess = createAction(
   LOAD_POSTS_SUCCESS,
   props<{ posts: Post[] }>()
 );
+export const dummyAction = createAction('dummy action');

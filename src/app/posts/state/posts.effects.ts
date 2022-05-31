@@ -2,34 +2,42 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Update } from '@ngrx/entity';
 import { RouterNavigatedAction, ROUTER_NAVIGATION } from '@ngrx/router-store';
-import { filter, map, mergeMap, switchMap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { filter, map, mergeMap, of, switchMap, withLatestFrom } from 'rxjs';
 import { Post } from 'src/app/models/posts.model';
+import { AppState } from 'src/app/store/app.state';
 import { PostsService } from '../posts.service';
 import {
   addPost,
   addPostSuccess,
   deletePost,
   deletePostSuccess,
+  dummyAction,
   loadPosts,
   loadPostsSuccess,
   updatePost,
   updatePostSuccess,
 } from './posts.action';
+import { getPosts } from './posts.selectors';
 
 @Injectable()
 export class PostsEffects {
-  constructor(private action$: Actions, private postsService: PostsService) {}
+  constructor(private action$: Actions, private postsService: PostsService, private store: Store<AppState>) {}
 
   loadPosts$ = createEffect(
     () => {
       return this.action$.pipe(
         ofType(loadPosts),
-        mergeMap((action) => {
-          return this.postsService.getPosts().pipe(
-            map((posts) => {
-              return loadPostsSuccess({ posts });
-            })
-          );
+        withLatestFrom(this.store.select(getPosts)),
+        mergeMap(([action, posts]) => {
+          if(!posts.length){
+            return this.postsService.getPosts().pipe(
+              map((posts) => {
+                return loadPostsSuccess({ posts });
+              })
+            );
+          }
+          return of(dummyAction());
         })
       );
     }
@@ -93,13 +101,17 @@ export class PostsEffects {
       map((r: RouterNavigatedAction)=>{
         return r.payload.routerState['params']['id'];
       }),
-      switchMap((id)=>{
-        return this.postsService.getPostById(id).pipe(
-          map((post)=>{
-            const postData = [{...post, id}];
-            return loadPostsSuccess({posts: postData});
-          })
-        )
+      withLatestFrom(this.store.select(getPosts)),
+      switchMap(([id, posts])=>{
+        if(!posts.length){
+          return this.postsService.getPostById(id).pipe(
+            map((post)=>{
+              const postData = [{...post, id}];
+              return loadPostsSuccess({posts: postData});
+            })
+          )
+        }
+        return of(dummyAction());
       })
     )
   })
