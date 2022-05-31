@@ -1,4 +1,5 @@
 <p>posts-list works!</p>
+<p> Total Posts: {{count | async}} </p>
 <button routerLink="add">Add Post</button>
 <table border="1" *ngIf="posts | async as postsList">
     <thead>

@@ -4,7 +4,7 @@ import { initialState, postAdapter } from "./posts.state";
 
 const _postsReducer = createReducer(initialState,
     on(addPostSuccess, (state, action) => {
-        return postAdapter.addOne(action.post, state);
+        return postAdapter.addOne(action.post, {...state, count: state.count + 1});
         // const post = { ...action.post };
         // post.id = (state.posts.length + 1).toString();
 
@@ -36,7 +36,10 @@ const _postsReducer = createReducer(initialState,
         // }
     }),
     on(loadPostsSuccess, (state, action)=>{
-        return postAdapter.setAll(action.posts, state);
+        return postAdapter.setAll(action.posts, {
+            ...state,
+            count: state.count + 1
+        });
         // return {
         //     ...state,
         //     posts: action.posts
