@@ -23,6 +23,8 @@ import { MaterialModule } from "./material.module";
 import { StoreRouterConnectingModule } from "@ngrx/router-store";
 import { IsAuthorizedDirective } from "./shared/directives/authorized.directive";
 import { CustomSerializer } from "./store/router/custom.serializer";
+import { EntityDataModule } from "@ngrx/data";
+import { entityConfig } from "./entity-metadata";
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
@@ -60,7 +62,8 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     MaterialModule,
     StoreRouterConnectingModule.forRoot({
       serializer: CustomSerializer
-    })
+    }),
+    EntityDataModule.forRoot(entityConfig)
   ],
   providers: [
     {

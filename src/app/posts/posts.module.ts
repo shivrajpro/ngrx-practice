@@ -7,10 +7,11 @@ import { StoreModule } from '@ngrx/store';
 import { AddPostComponent } from './add-post/add-post.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { PostsListComponent } from './posts-list/posts-list.component';
-import { PostsEffects } from './state/posts.effects';
+// import { PostsEffects } from './state/posts.effects';
 import { postsReducer } from './state/posts.reducer';
 import { POSTS_STATE_NAME } from './state/posts.selectors';
 import { SinglePostComponent } from './single-post/single-post.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -33,9 +34,10 @@ const routes: Routes = [
     CommonModule, 
     FormsModule, 
     ReactiveFormsModule, 
+    HttpClientModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature(POSTS_STATE_NAME, postsReducer),
-    EffectsModule.forFeature([PostsEffects])
+    // EffectsModule.forFeature([PostsEffects])
   ]
 })
 export class PostsModule {}

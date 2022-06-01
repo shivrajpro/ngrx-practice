@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { EntityCollectionServiceBase, EntityCollectionServiceElementsFactory } from '@ngrx/data';
 import { map, Observable } from 'rxjs';
 import { Post } from '../models/posts.model';
-
+/*
 @Injectable({
   providedIn: 'root',
 })
@@ -47,5 +48,14 @@ export class PostsService {
 
   getPostById(id:string){
     return this.http.get<Post>(`https://ngrx-practice-b655e-default-rtdb.firebaseio.com/posts/${id}.json`);
+  }
+}
+*/
+@Injectable({
+  providedIn: 'root',
+})
+export class PostService extends EntityCollectionServiceBase<Post>{
+  constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory){
+    super('Post', serviceElementsFactory);
   }
 }
