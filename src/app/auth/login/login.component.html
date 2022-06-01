@@ -1,6 +1,33 @@
 <p>login works!</p>
-<form [formGroup]="loginForm" (ngSubmit)="onLogin()" >
+<form *ngIf="false" [formGroup]="loginForm" (ngSubmit)="onLogin()" >
     <input type="email" placeholder="Enter email" formControlName="email" />
     <input type="password" placeholder="Enter password" formControlName="password" />
     <button type="submit">Login</button>
 </form>
+<main class="container">
+    <section class="left">
+        <img src="../../../assets/images/plant.jpg" width="400" height="400" >
+        <p class="footer" >  Byonic.ai All Rights Reserved. </p>
+    </section>
+    <section class="right">
+        <div class="heading">
+            <img src="../../../assets/icons/logo.svg" alt="ms logo" height="63" width="70" >
+            <div class="title">
+                <h1>Connect360</h1>
+                <span>Powered By BYONIC.ai</span>
+            </div>
+        </div>
+        <div class="actions">
+            <h2 class="sign-in">Sign In</h2>
+            <button class="sign-in-btn" >
+                <img src="../../../assets/icons/ms-logo.svg" alt="ms logo" height="15" width="15" >
+                Sign in with Microsoft
+            </button>
+            <div class="helper-links">
+                <a href="#">Need help?</a>
+                <a href="#">Forgot Password?</a>
+            </div>
+        </div>
+        <p class="footer"> By continuing, you agree to Connect360 terms of service and privacy policy.</p>
+    </section>
+</main>

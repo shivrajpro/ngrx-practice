@@ -1,0 +1,146 @@
+.container {
+  display: flex;
+  height: 90vh;
+  width: 100vw;
+
+  .left{
+      img{
+          border-radius: 50%;
+      }
+      .footer{
+          color:#1c468a;
+      }
+  }
+  .left,
+  .right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    // border: 1px solid red;
+    // color: white;
+  }
+
+  .right {
+    background: #1c468a;
+    .heading {
+      display: flex;
+
+      .title {
+        h1 {
+          margin: 0;
+          width: 254px;
+          height: 58px;
+
+          font-family: "Segoe UI";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 48px;
+          line-height: 58px;
+          /* identical to box height, or 121% */
+
+          /* Text/White */
+
+          color: #ffffff;
+
+          /* Inside auto layout */
+
+          flex: none;
+          order: 0;
+          flex-grow: 0;
+        }
+
+        span {
+          width: 158px;
+          height: 24px;
+
+          font-family: "Segoe UI";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+          color: #ffffff;
+          float: right;
+        }
+      }
+    }
+
+    .actions {
+      // border: 1px solid;
+      display: flex;
+      text-align: center;
+      flex-direction: column;
+      justify-content: center;
+
+      .sign-in {
+        margin: 36px 0;
+        text-align: center;
+        font-size: 24px;
+        letter-spacing: 0.5px;
+        color: white;
+      }
+
+      .sign-in-btn {
+        // width: 288px;
+        cursor: pointer;
+        height: 48px;
+        font-family: "Segoe UI";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        color: #1c468a;
+        border: 1px solid #112e51;
+        border-radius: 4px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 12px 40px;
+        gap: 24px;
+      }
+
+      .helper-links {
+        margin-top: 8px;
+        display: flex;
+        justify-content: space-between;
+
+        a {
+          color: #e2e8f4;
+          letter-spacing: 0.25px;
+          font-family: "Segoe UI";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 14px;
+        }
+      }
+    }
+
+    .footer{
+        color:#ffffff;
+    }
+  }
+
+  .footer{
+    margin: 0;
+    position: absolute;
+    bottom: 32px;
+    
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    /* identical to box height, or 117% */
+    
+    letter-spacing: 0.25px;
+    
+    /* Blue/Blue-400 */
+    
+    color: #1C468A;    
+  }
+}
