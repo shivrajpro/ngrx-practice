@@ -20,7 +20,10 @@ export class PostsListComponent implements OnInit {
     // this.store.dispatch(loadPosts());
     // this.posts = this.store.select(getPosts);
     // this.count = this.store.select(getCount);
-    this.postService.getAll();
+    
+    
+    // this.posts = this.postService.getAll();
+    this.posts = this.postService.entities$;
   }
 
   ngOnInit(): void {

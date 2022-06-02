@@ -12,11 +12,15 @@ import { postsReducer } from './state/posts.reducer';
 import { POSTS_STATE_NAME } from './state/posts.selectors';
 import { SinglePostComponent } from './single-post/single-post.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PostDataService } from './post-data.service';
+import { EntityDataService } from '@ngrx/data';
+import { PostsResolver } from './posts.resolver';
 
 const routes: Routes = [
   {
     path: '',
     component: PostsListComponent,
+    resolve:{posts: PostsResolver},
     children: [
       { path: 'add', component: AddPostComponent },
       { path: 'edit/:id', component: EditPostComponent }
@@ -38,6 +42,11 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     StoreModule.forFeature(POSTS_STATE_NAME, postsReducer),
     // EffectsModule.forFeature([PostsEffects])
-  ]
+  ],
+  providers: [PostDataService, PostsResolver]
 })
-export class PostsModule {}
+export class PostsModule {
+  constructor(entityDataService: EntityDataService, postDataService: PostDataService){
+    entityDataService.registerService('Post',postDataService);
+  }
+}
