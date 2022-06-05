@@ -13,8 +13,9 @@ import { POSTS_STATE_NAME } from './state/posts.selectors';
 import { SinglePostComponent } from './single-post/single-post.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PostDataService } from './post-data.service';
-import { EntityDataService } from '@ngrx/data';
+import { EntityDataService, EntityDefinitionService } from '@ngrx/data';
 import { PostsResolver } from './posts.resolver';
+import { entityMetadata } from '../entity-metadata';
 
 const routes: Routes = [
   {
@@ -40,13 +41,14 @@ const routes: Routes = [
     ReactiveFormsModule, 
     HttpClientModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature(POSTS_STATE_NAME, postsReducer),
+    StoreModule.forFeature(POSTS_STATE_NAME, postsReducer)
     // EffectsModule.forFeature([PostsEffects])
   ],
   providers: [PostDataService, PostsResolver]
 })
 export class PostsModule {
-  constructor(entityDataService: EntityDataService, postDataService: PostDataService){
+  constructor(entityDataService: EntityDataService, postDataService: PostDataService, eds: EntityDefinitionService){
     entityDataService.registerService('Post',postDataService);
+    eds.registerMetadataMap(entityMetadata);
   }
 }
