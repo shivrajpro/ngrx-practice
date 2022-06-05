@@ -3,7 +3,9 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/r
 import { first, Observable, tap } from "rxjs";
 import { PostService } from "./posts.service";
 
-@Injectable()
+@Injectable({
+    providedIn:'root'
+})
 export class PostsResolver implements Resolve<boolean>{
     constructor(private postsService: PostService){}
 

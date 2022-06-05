@@ -1,5 +1,6 @@
 <p>single-post works!</p>
-<div *ngIf="post | async as postData" >
+<!-- <div *ngIf="post | async as postData" > -->
+<div *ngIf="post as postData" >
     <p> Id: {{postData.id}} </p>
     <p> Title: {{postData.title}} </p>
     <p> Description: {{postData.description}} </p>

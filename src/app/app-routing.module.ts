@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MsalGuard } from './msalguard.guard';
+import { PostsResolver } from './posts/posts.resolver';
 import { SinglePostComponent } from './posts/single-post/single-post.component';
 import { PublicPageComponent } from './public-page/public-page.component';
 import { RestrictedPageComponent } from './restricted-page/restricted-page.component';
@@ -35,6 +36,7 @@ const routes: Routes = [
   },
   {
     path:'posts/details/:id',
+    resolve:{posts: PostsResolver},
     component: SinglePostComponent
   }
 ];

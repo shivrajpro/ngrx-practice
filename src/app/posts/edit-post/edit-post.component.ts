@@ -42,10 +42,12 @@ export class EditPostComponent implements OnInit, OnDestroy {
     this.postsService.entities$.subscribe(posts=>{
       const post = posts.find(post=> post.id == this.id);
       this.post = post;
-      this.postForm.patchValue({
-        title:post.title,
-        description: post.description
-      })
+      if(post){
+        this.postForm.patchValue({
+          title:post.title,
+          description: post.description
+        })
+      }
     })
 
     // this.store.select(getPostById).subscribe((post)=>{
