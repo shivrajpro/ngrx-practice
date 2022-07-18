@@ -25,7 +25,7 @@ import { IsAuthorizedDirective } from "./shared/directives/authorized.directive"
 import { CustomSerializer } from "./store/router/custom.serializer";
 import { EntityDataModule } from "@ngrx/data";
 import { entityConfig } from "./entity-metadata";
-
+import { NgChartsModule } from "ng2-charts";
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
     auth:{
@@ -45,6 +45,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     IsAuthorizedDirective
   ],
   imports: [
+    NgChartsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

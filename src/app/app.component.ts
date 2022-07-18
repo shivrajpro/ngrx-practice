@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { Store } from '@ngrx/store';
+import { ChartConfiguration } from 'chart.js';
 import { Observable } from 'rxjs';
 import { autoLogin } from './auth/state/auth.actions';
 import { AppState } from './store/app.state';
@@ -17,6 +18,15 @@ export class AppComponent implements OnInit {
   showLoading: Observable<boolean>;
   errorMessage: Observable<string>;
   panelOpenState = false;
+  // Doughnut
+  public doughnutChartLabels: string[] = [ 'Download Sales', 'In-Store Sales', 'Mail-Order Sales' ];
+  public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] = [
+      { data: [ 350, 450, 100 ], label: 'Series A' }
+    ];
+
+  public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
+    responsive: false
+  };
 
   constructor(private store: Store<AppState>, 
     private msalService: MsalService,
