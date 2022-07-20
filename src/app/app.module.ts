@@ -26,6 +26,7 @@ import { CustomSerializer } from "./store/router/custom.serializer";
 import { EntityDataModule } from "@ngrx/data";
 import { entityConfig } from "./entity-metadata";
 import { NgChartsModule } from "ng2-charts";
+import { ServerSideSearchExampleComponent } from "./server-side-search-example/server-side-search-example.component";
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
     auth:{
@@ -42,12 +43,14 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     LoadingSpinnerComponent,
     PublicPageComponent,
     RestrictedPageComponent,
-    IsAuthorizedDirective
+    IsAuthorizedDirective,
+    ServerSideSearchExampleComponent
   ],
   imports: [
     NgChartsModule,
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
