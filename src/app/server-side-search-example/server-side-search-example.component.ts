@@ -91,4 +91,20 @@ export class ServerSideSearchExampleComponent implements OnInit, OnDestroy {
       this.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1)
     );
   }
+
+  getNextBatch(){
+    console.log("getNextBatch")
+    const austriaBanks = [
+      { name: 'Bank L (Austria)', id: 'L' },
+      { name: 'Bank M (Austria)', id: 'M' },
+      { name: 'Bank N (Austria)', id: 'N' },
+      { name: 'Bank O (Austria)', id: 'O' },
+      { name: 'Bank P (Austria)', id: 'P' },
+      { name: 'Bank Q (Austria)', id: 'Q' },
+      { name: 'Bank R (Austria)', id: 'R' },
+    ];
+    
+    const newBanks = [...this.banks.slice(), ...austriaBanks];
+    this.filteredBanksMulti.next(newBanks);
+  }
 }

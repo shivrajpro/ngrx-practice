@@ -3,7 +3,7 @@
     <h3>Multiple selection</h3>
     <p>
       <mat-form-field>
-        <mat-select [formControl]="bankMultiCtrl" placeholder="Banks" [multiple]="true" #multiSelect>
+        <mat-select (infiniteScroll)="getNextBatch()" [formControl]="bankMultiCtrl" placeholder="Banks" [multiple]="true" #multiSelect msInfiniteScroll>
           <mat-option>
             <ngx-mat-select-search [formControl]="bankMultiFilterCtrl"></ngx-mat-select-search>
           </mat-option>
