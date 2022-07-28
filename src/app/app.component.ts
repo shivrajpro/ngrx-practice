@@ -18,15 +18,7 @@ export class AppComponent implements OnInit {
   showLoading: Observable<boolean>;
   errorMessage: Observable<string>;
   panelOpenState = false;
-  // Doughnut
-  public doughnutChartLabels: string[] = [ 'Download Sales', 'In-Store Sales', 'Mail-Order Sales' ];
-  public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] = [
-      { data: [ 350, 450, 100 ], label: 'Series A' }
-    ];
 
-  public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
-    responsive: false
-  };
 
   constructor(private store: Store<AppState>, 
     private msalService: MsalService,

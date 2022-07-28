@@ -1,0 +1,8 @@
+<p>html-to-pdf works!</p>
+<div id="donutChart">
+    <canvas baseChart [labels]="doughnutChartLabels" [datasets]="doughnutChartDatasets" [options]="doughnutChartOptions"
+        [legend]="true" [type]="'doughnut'">
+    </canvas>
+</div>
+<button (click)="toPdf()" >Export to PDF</button>
+<button (click)="convetToPDF()" >Export to PDF h2c</button>
