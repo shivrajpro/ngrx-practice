@@ -1,3 +1,9 @@
+State:
+    The data which is not shared by the components should not be added in store.
+    e.g. form data
+
+Action:
+    whenever an event is performed we have to dispatch an action
 selector is only to read the data and give a name to state
 
 store.select is for selectors and store.dispatch is for actions
