@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # ngrx-practice
 =======
 # MyApp
